@@ -1,0 +1,194 @@
+<html lang="eng">
+<img src="touchpoint 2.0-01.png">
+
+<style>
+  body {
+    background-color: rgb(180, 187, 185);
+  }
+</style>
+
+<body>
+  <h1>TouchPoint Food Pantry</h1>
+    <div id="status-banner" style="display:none; padding:10px; margin-bottom:15px; border:1px solid #000;"></div>
+  <section>
+    <h2> Search &amp; Browse Inventory</h2>
+    <form id="invetory-search-form">
+      <label for="search-input">Search Inventory:</label>
+      <input type="text" id="search-input" name="search"/>
+      <label for="category-filter">Category:</label>
+      <select id="category-filter" name="category">
+        <option value="">All</option>
+        <option value="Canned Goods">Canned Goods</option>
+        <option value="Dry Goods">Dry Goods</option>
+        <option value="Fresh Produce">Fresh Produce</option>
+        <option value="Frozen Foods">Frozen Foods</option>
+        <option value="Beverages">Beverages</option>
+        <option value="Snacks">Snacks</option>
+        <option value="Other">Other</option>
+      </select>
+      <button type="submit">Search</button>
+      <button type="button" id="reset-search-btn">Reset</button>
+      </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Storage</th>
+                    <th>Quantity</th>
+                    <th>Min Threshold</th>
+                    <th>Expiration Date</th>
+                </tr>
+            </thead>
+            <tbody id="inventory-table-body"></tbody>
+        </table>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2> Record Distribution</h2>
+    <form id="distribution-form">
+      <label>Household: <select id="distribution-household"></select></label>
+      <label>Staff Member: <select id="distribution-staff"></select></label>
+      <label>Food Item: <select id="distribution-item"></select></label>
+      <label>Quantity: <input type="number" id="distribution-quantity"/></label>
+      <label>Notes: <input type="text" id="distribution-notes"/></label>
+      <button type="submit">Complete Distribution</button>
+    </form>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>View Distribution History</h2>
+    <form id="visit-filter-form">
+            <label>
+                Filter by Household:
+                <select id="visit-household-filter">
+                    <option value="">All Households</option>
+                </select>
+            </label>
+            <button type="submit">Filter Visits</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Visit ID</th>
+                    <th>Date</th>
+                    <th>Household</th>
+                    <th>Zip Code</th>
+                    <th>Served By</th>
+                    <th>Item Distributed</th>
+                    <th>Qty</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody id="visits-table-body"></tbody>
+        </table>
+  </section>
+
+  <section>
+        <h2>Register New Household</h2>
+        <form id="add-household-form">
+            <label>First Name: <input type="text" id="household-first-name"></label>
+            <label>Last Name: <input type="text" id="household-last-name"></label>
+            <label>Email: <input type="email" id="household-email"></label>
+            <label>Phone: <input type="text" id="household-phone"></label>
+            <label>Household Size: <input type="number" id="household-size"></label>
+            <label>Street Address: <input type="text" id="household-address"></label>
+            <label>Zip Code: <input type="text" id="household-zip"></label>
+            <button type="submit">Register Household</button>
+        </form>
+  </section>
+
+  <section>
+    <h2>Invetory Updates</h2>
+    <label>Select Inventory Items: <select id="update-item-select"></select></label>
+    <label>Update Item Quantity: <input type="number" id="update-item-quantity"></input></label>
+    <form id="update-stock-form">
+      <button type="submit">Update Items Quantity</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Add New Inventory Item</h2>
+    <form id="add-inventory-form">
+      <label>Item Name: <input type="text" id="inventory-item-name"></label>
+      <label>Category:
+        <select id="inventory-category">
+          <option value="Canned Goods">Canned Goods</option>
+          <option value="Dry Goods">Dry Goods</option>
+          <option value="Fresh Produce">Fresh Produce</option>
+          <option value="Frozen Foods">Frozen Foods</option>
+          <option value="Beverages">Beverages</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <label>Storage:
+        <select id="inventory-storage">
+          <option value="Dry Storage">Dry Storage</option>
+          <option value="Refrigerated">Refrigerated</option>
+          <option value="Freezer">Freezer</option>
+        </select>
+      </label>
+      <label>Quantity: <input type="number" min="0" id="inventory-quantity" value="0"></label>
+      <label>Min Threshold: <input type="number" min="0" id="inventory-threshold" value="10"></label>
+      <label>Expiration Date: <input type="date" id="inventory-expiration"></label>
+      <button type="submit">Add Inventory Item</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Donor Impact Summary</h2>
+    <button type="button" id="refresh-reports-btn">Refresh Reports</button>
+    <table>
+      <thead>
+      <tr>
+        <th>Donor Name</th>
+        <th>Donor Type</th>
+        <th>Total Drop-off Batches</th>
+        <th>Total Items Donated</th>
+      </tr>
+      </thead>
+      <tbody id="report-donors-summary"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>Low Stock / Expiration Alerts</h3>
+    <button type="button" id="refresh-reports-btn">Refresh Reports</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Storage</th>
+          <th>Current Stock</th>
+          <th>Min Threshold</th>
+          <th>Expiration Date</th>
+        </tr>
+      </thead>
+      <tbody id="report-alerts-body"></tbody>
+    </table>
+  </section>
+  
+  <section>
+    <h3>Assistance Summary by Zip Code (GROUP BY Aggregate)</h3>
+    <button type="button" id="refresh-reports-btn">Refresh Reports</button>
+      <table>
+          <thead>
+              <tr>
+                  <th>Zip Code</th>
+                  <th>Registered Households</th>
+                  <th>Total Distribution Visits</th>
+              </tr>
+          </thead>
+          <tbody id="report-zip-body"></tbody>
+      </table>
+  </section>
+
+<script src="app.js"></script>
+</body>
+</html>
